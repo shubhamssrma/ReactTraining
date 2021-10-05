@@ -4,6 +4,7 @@ export default class ModalButton extends React.Component{
         super(props);
         this.state = {
             change:this.props.access,
+           
         }
         this.handleAddButton = this.handleAddButton.bind(this);
         this.handleEditButton = this.handleEditButton.bind(this);
@@ -13,57 +14,63 @@ export default class ModalButton extends React.Component{
         this.handleExitButton = this.handleExitButton.bind(this);
 
     }
-    handleAddButton(){
+    handleAddButton (e){
         this.setState({
-            change: !this.state.change
+            change: !this.state.change,
         })
-        console.log(this.state.change)
-        console.log("Add function call")
+        // console.log('handleAddButton is called');
+        
+        this.props.fun(this.state.change);  // passing props from child  to parent {ModalButton to ModalBody}
+        // console.log(this.props.passing);
+        // this.props.passing()
+        // console.log(this.state.change)
+        // console.log("Add function call")
     }
     handleEditButton(){
         this.setState({
             change: !this.state.change
         })
-        console.log(this.state.change)
+        alert("hello world")
+        // console.log(this.state.change)
         // console.log(this.props.access)
-        console.log("Edit function call")
+        // console.log("Edit function call")
     }
     handleSaveButton(){
         this.setState({
             change: !this.state.change
         })
-        console.log(this.state.change)
-        // console.log(this.props.access)
-        console.log("Save function call")
+        // console.log(this.state.change)
+        // // console.log(this.props.access)
+        // console.log("Save function call")
     }
     handleFindButton(){
         this.setState({
             change: !this.state.change
         })
-        console.log(this.state.change)
-        // console.log(this.props.access)
-        console.log("Find function call")
+        // console.log(this.state.change)
+        // // console.log(this.props.access)
+        // console.log("Find function call")
     }
     handleDeleteButton(){
         this.setState({
             change: !this.state.change
         })
-        console.log(this.state.change)
-        // console.log(this.props.access)
-        console.log("Delete function call")
+        // console.log(this.state.change)
+        // // console.log(this.props.access)
+        // console.log("Delete function call")
     }
     handleExitButton(){
         this.setState({
             change: !this.state.change
         })
-        console.log(this.state.change)
-        // console.log(this.props.access)/
-        console.log("Exit function call")
+        // console.log(this.state.change)
+        // // console.log(this.props.access)/
+        // console.log("Exit function call")
     }
     render(){
         return(
             <button onClick={()=>{
-                if(this.props.title === "Add"){
+                if(this.props.title === "Add" || this.props.title === "Remove"){
                     this.handleAddButton();
                 }else if(this.props.title === "Edit"){
                     this.handleEditButton();

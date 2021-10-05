@@ -15,10 +15,10 @@ export default class MyModalFooter extends React.Component {
         return (
             <div className="mb-3">
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col" style={{display:"block"}}>
                         <ModalFooterButton class="btn btn-success" title="Previous" access={false} />
                     </div>
-                    <div className="col-md-6" style={{textAlign:"right"}}>
+                    <div className="col" style={{textAlign:"right"}}>
                         <ModalFooterButton class="btn btn-success" title="Next" access={false} float="right" click={this.callAxios} />
                     </div>
                 </div>
