@@ -1,0 +1,12 @@
+@media (min-width: 576px)
+{
+    #modal-dialog {
+        max-width: 900px;
+    }
+    #label09,#label011{
+        padding-left: 50px;
+    }
+}
+#modal-footer{
+    display: block;
+}
