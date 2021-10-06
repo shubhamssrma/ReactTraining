@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import MenuItem from '@material-ui/core/MenuItem'
+import axios from 'axios'
 export default class MyModalBody extends React.Component {
     constructor() {
         super();
@@ -29,7 +30,8 @@ export default class MyModalBody extends React.Component {
             stockValue: '',
             consValue: '',
             hsnValue: '',
-            taxValue: ''
+            taxValue: '',
+            // data : []
         }
         this.setDisable = this.setDisable.bind(this)
         this.setmaterialSelect = this.setmaterialSelect.bind(this)
@@ -91,6 +93,13 @@ export default class MyModalBody extends React.Component {
         this.setState({ hsnValue: '' })
         this.setState({ taxValue: '' })
     }
+    // componentDidMount(){
+    //     axios.get("http://localhost/db.php")
+    //     .then(response => {
+    //         this.setState({data : response.data})
+    //         console.log(this.state.data)
+    //     })
+    // }
     render() {
         return (
             <form>
@@ -103,6 +112,7 @@ export default class MyModalBody extends React.Component {
                         <div className="col-md-9">
                             <Select name="materialType" displayEmpty disabled={this.state.value} value={this.state.materialSelect} onChange={this.setmaterialSelect}>
                                 <MenuItem value="" disabled>Select Material Type</MenuItem>
+                                {/* {this.state.data.map((type,index) => <MenuItem key={index} value={type}>{type}</MenuItem>)} */}
                                 <MenuItem value={1}>Choose 1</MenuItem>
                                 <MenuItem value={2}>Choose 2</MenuItem>
                                 <MenuItem value={3}>Choose 3</MenuItem>
@@ -216,13 +226,13 @@ export default class MyModalBody extends React.Component {
                 <div className="mb-3">
                     <div className="row">
                         <div className="col-sm-2">
-                            <button type="button" type="button" className="btn btn-primary" style={{ width: "100%" }} onClick={this.setDisable}>{this.state.value === true ? "Add" : "Remove"}</button>
+                            <button type="button" className="btn btn-primary" style={{ width: "100%" }} onClick={this.setDisable}>{this.state.value === true ? "Add" : "Remove"}</button>
                         </div>
                         <div className="col-sm-2">
                             <button type="button" className="btn btn-success" style={{ width: "100%" }} onClick={() => alert("You are able to edit this")}>Edit</button>
                         </div>
                         <div className="col-sm-2">
-                            <button type="button" className="btn btn-success" disabled style={{ width: "100%" }}>Save</button>
+                            <button type="button" className="btn btn-success" disabled={this.state.value} style={{ width: "100%" }}>Save</button>
                         </div>
                         <div className="col-sm-2">
                             <button type="button" className="btn btn-info" style={{ width: "100%" }}>Find</button>
