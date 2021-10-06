@@ -2,12 +2,12 @@
 import './App.css';
 import Mymodal from './Modal/Modal'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import ApiData from './ApiFetchData/ApiData';
+// import ApiData from './ApiFetchData/ApiData';
 function App() {
   return (
     <div>
-      {/* <Mymodal /> */}
-      <ApiData />
+      <Mymodal />
+      {/* <ApiData /> */}
     </div>
   );
 }

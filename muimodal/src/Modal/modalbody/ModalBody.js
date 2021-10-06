@@ -12,13 +12,13 @@ import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import MenuItem from '@material-ui/core/MenuItem'
-import axios from 'axios'
+// import axios from 'axios'
 export default class MyModalBody extends React.Component {
     constructor() {
         super();
         this.state = {
             text: "text",
-            checkbox: true,
+            // checkbox: true,
             value: true,
             materialSelect: '',
             partNameValue: '',
@@ -32,6 +32,7 @@ export default class MyModalBody extends React.Component {
             hsnValue: '',
             taxValue: '',
             // data : []
+            exitShow:true
         }
         this.setDisable = this.setDisable.bind(this)
         this.setmaterialSelect = this.setmaterialSelect.bind(this)
@@ -45,6 +46,7 @@ export default class MyModalBody extends React.Component {
         this.setconsValue = this.setconsValue.bind(this)
         this.sethsnValue = this.sethsnValue.bind(this)
         this.settaxValue = this.settaxValue.bind(this)
+        this.handleExit = this.handleExit.bind(this)
     }
     setmaterialSelect(e) {
         this.setState({ materialSelect: e.target.value })
@@ -79,6 +81,10 @@ export default class MyModalBody extends React.Component {
     settaxValue(e) {
         this.setState({ taxValue: e.target.value })
     }
+    handleExit(e){
+        this.setState({exitShow:!this.state.exitShow})
+        this.props.fun(this.state.exitShow)
+    }
     setDisable(e) {
         this.setState({ value: !this.state.value })
         this.setState({ materialSelect: "" })
@@ -86,7 +92,7 @@ export default class MyModalBody extends React.Component {
         this.setState({ partNumberValue: '' })
         this.setState({ ppcNameValue: '' })
         this.setState({ descriptionValue: '' })
-        this.setState({ allowBomValue: '', })
+        this.setState({ allowBomValue: false, })
         this.setState({ unitValue: '', })
         this.setState({ stockValue: '' })
         this.setState({ consValue: '' })
@@ -110,7 +116,7 @@ export default class MyModalBody extends React.Component {
                             <InputLabel className="InputLabel">Material Type</InputLabel>
                         </div>
                         <div className="col-md-9">
-                            <Select name="materialType" displayEmpty disabled={this.state.value} value={this.state.materialSelect} onChange={this.setmaterialSelect}>
+                            <Select name="materialType" color="secondary" displayEmpty disabled={this.state.value} value={this.state.materialSelect} onChange={this.setmaterialSelect}>
                                 <MenuItem value="" disabled>Select Material Type</MenuItem>
                                 {/* {this.state.data.map((type,index) => <MenuItem key={index} value={type}>{type}</MenuItem>)} */}
                                 <MenuItem value={1}>Choose 1</MenuItem>
@@ -131,7 +137,7 @@ export default class MyModalBody extends React.Component {
 
                         </div>
                         <div className="col-md-10">
-                            <TextField name="partName" color="secondary" value={this.state.partNameValue} onChange={this.setpartNameValue} disabled={this.state.value} />
+                            <TextField name="partName" autoComplete="off" color="secondary" value={this.state.partNameValue} onChange={this.setpartNameValue} disabled={this.state.value} />
                         </div>
                     </div>
                 </div>
@@ -142,7 +148,7 @@ export default class MyModalBody extends React.Component {
                             <InputLabel className="InputLabel">Part No :</InputLabel>
                         </div>
                         <div className="col-md-8">
-                            <TextField name="partNumber" color="secondary" value={this.state.partNumberValue} disabled={this.state.value} onChange={this.setpartNumberValue} />
+                            <TextField name="partNumber" autoComplete="off" color="secondary" value={this.state.partNumberValue} disabled={this.state.value} onChange={this.setpartNumberValue} />
                         </div>
                         <div className="col-md-2">
                             <Checkbox id="allowBom" color="secondary" disabled={this.state.value} onChange={this.setallowBomValue} checked={this.state.allowBomValue}/>
@@ -157,7 +163,7 @@ export default class MyModalBody extends React.Component {
                             <InputLabel className="InputLabel">PPC Name :</InputLabel>
                         </div>
                         <div className="col-md-10">
-                            <TextField name="ppcName" color="secondary" value={this.state.ppcNameValue} disabled={this.state.value} onChange={this.setppcNameValue} />
+                            <TextField name="ppcName" autoComplete="off" color="secondary" value={this.state.ppcNameValue} disabled={this.state.value} onChange={this.setppcNameValue} />
                         </div>
                     </div>
                 </div>
@@ -168,7 +174,7 @@ export default class MyModalBody extends React.Component {
                             <InputLabel className="InputLabel">Description :</InputLabel>
                         </div>
                         <div className="col-md-6">
-                            <TextField name='description' color="secondary" disabled={this.state.value} value={this.state.descriptionValue} onChange={this.setdescriptionValue} />
+                            <TextField name='description' autoComplete="off" color="secondary" disabled={this.state.value} value={this.state.descriptionValue} onChange={this.setdescriptionValue} />
                         </div>
                         <div className="col-md-4">
                             <div className="row">
@@ -176,7 +182,7 @@ export default class MyModalBody extends React.Component {
                                     <InputLabel className="InputLabel">Unit :</InputLabel>
                                 </div>
                                 <div className="col-md-9">
-                                    <Select name='unit' displayEmpty disabled={this.state.value} value={this.state.unitValue} onChange={this.setunitValue}>
+                                    <Select name='unit' color="secondary" displayEmpty disabled={this.state.value} value={this.state.unitValue} onChange={this.setunitValue}>
                                         <MenuItem value="" disabled>Select Unit</MenuItem>
                                         <MenuItem value={1}>Hello world</MenuItem>
                                     </Select>
@@ -192,13 +198,13 @@ export default class MyModalBody extends React.Component {
                             <InputLabel className="InputLabel">Stock Location :</InputLabel>
                         </div>
                         <div className="col-md-4">
-                            <TextField name='stockLocation' color="secondary" value={this.state.stockValue} disabled={this.state.value} onChange={this.setstockValue} />
+                            <TextField name='stockLocation' autoComplete="off" color="secondary" value={this.state.stockValue} disabled={this.state.value} onChange={this.setstockValue} />
                         </div>
                         <div className="col-md-2" id="label09">
                             <InputLabel className="InputLabel">Cons Unit :</InputLabel>
                         </div>
                         <div className="col-md-4">
-                            <Select displayEmpty disabled={this.state.value} value={this.state.consValue} onChange={this.setconsValue}>
+                            <Select color="secondary" displayEmpty disabled={this.state.value} value={this.state.consValue} onChange={this.setconsValue}>
                                 <MenuItem value="" disabled>Select Cons Unit</MenuItem>
                                 <MenuItem value={1}>Hello world</MenuItem>
                             </Select>
@@ -212,13 +218,13 @@ export default class MyModalBody extends React.Component {
                             <InputLabel className="InputLabel">HSN Code :</InputLabel>
                         </div>
                         <div className="col-md-4">
-                            <TextField color="secondary" value={this.state.hsnValue} disabled={this.state.value} onChange={this.sethsnValue} />
+                            <TextField color="secondary" autoComplete="off" value={this.state.hsnValue} disabled={this.state.value} onChange={this.sethsnValue} />
                         </div>
                         <div className="col-md-2" id="label011">
                             <InputLabel className="InputLabel">Tax% :</InputLabel>
                         </div>
                         <div className="col-md-4">
-                            <TextField color="secondary" disabled={this.state.value} value={this.state.taxValue} onChange={this.settaxValue} />
+                            <TextField color="secondary" autoComplete="off" disabled={this.state.value} value={this.state.taxValue} onChange={this.settaxValue} />
                         </div>
                     </div>
                 </div>
@@ -241,7 +247,7 @@ export default class MyModalBody extends React.Component {
                             <button type="button" className="btn btn-danger" style={{ width: "100%" }}>Delete</button>
                         </div>
                         <div className="col-sm-2">
-                            <button type="button" className="btn btn-warning" style={{ width: "100%" }}>Exit</button>
+                            <button type="button" className="btn btn-warning" style={{ width: "100%" }} onClick={this.handleExit}>Exit</button>
                         </div>
                     </div>
                 </div>
