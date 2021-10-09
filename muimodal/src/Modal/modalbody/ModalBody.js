@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import MenuItem from '@material-ui/core/MenuItem'
+import { Modal } from 'react-bootstrap'
 // import axios from 'axios'
 export default class MyModalBody extends React.Component {
     constructor() {
@@ -32,7 +33,8 @@ export default class MyModalBody extends React.Component {
             hsnValue: '',
             taxValue: '',
             // data : []
-            exitShow:true
+            exitShow:true,
+            showNestedModal:false
         }
         this.setDisable = this.setDisable.bind(this)
         this.setmaterialSelect = this.setmaterialSelect.bind(this)
@@ -47,6 +49,10 @@ export default class MyModalBody extends React.Component {
         this.sethsnValue = this.sethsnValue.bind(this)
         this.settaxValue = this.settaxValue.bind(this)
         this.handleExit = this.handleExit.bind(this)
+        this.nestedModal = this.nestedModal.bind(this)
+    }
+    nestedModal(){
+        this.setState({showNestedModal:!this.state.showNestedModal})
     }
     setmaterialSelect(e) {
         this.setState({ materialSelect: e.target.value })
@@ -108,6 +114,12 @@ export default class MyModalBody extends React.Component {
     // }
     render() {
         return (
+            <>
+            <Modal show={this.state.showNestedModal} onHide={() => this.nestedModal()}>
+                <Modal.Header>Heading</Modal.Header>
+                <Modal.Body>Body</Modal.Body>
+                <Modal.Footer>Footer</Modal.Footer>
+            </Modal>
             <form>
                 {/* Material Type Box 1 */}
                 <div className="mb-3">
@@ -118,10 +130,10 @@ export default class MyModalBody extends React.Component {
                         <div className="col-md-9">
                             <Select name="materialType" color="secondary" displayEmpty disabled={this.state.value} value={this.state.materialSelect} onChange={this.setmaterialSelect}>
                                 <MenuItem value="" disabled>Select Material Type</MenuItem>
-                                {/* {this.state.data.map((type,index) => <MenuItem key={index} value={type}>{type}</MenuItem>)} */}
-                                <MenuItem value={1}>Choose 1</MenuItem>
+                                {this.props.data.map((type,index) => <MenuItem key={index} value={type.part_name}>{type.part_name}</MenuItem>)}
+                                {/* <MenuItem value={1}>Choose 1</MenuItem>
                                 <MenuItem value={2}>Choose 2</MenuItem>
-                                <MenuItem value={3}>Choose 3</MenuItem>
+                                <MenuItem value={3}>Choose 3</MenuItem> */}
                             </Select>
                         </div>
                         <div className="col-md-1">
@@ -241,7 +253,7 @@ export default class MyModalBody extends React.Component {
                             <button type="button" className="btn btn-success" disabled={this.state.value} style={{ width: "100%" }}>Save</button>
                         </div>
                         <div className="col-sm-2">
-                            <button type="button" className="btn btn-info" style={{ width: "100%" }}>Find</button>
+                            <button type="button" className="btn btn-info" style={{ width: "100%" }} onClick={this.nestedModal}>Find</button>
                         </div>
                         <div className="col-sm-2">
                             <button type="button" className="btn btn-danger" style={{ width: "100%" }}>Delete</button>
@@ -252,6 +264,7 @@ export default class MyModalBody extends React.Component {
                     </div>
                 </div>
             </form>
+            </>
         );
     }
 }
