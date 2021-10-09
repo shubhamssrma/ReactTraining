@@ -115,7 +115,7 @@ export default class MyModalBody extends React.Component {
     render() {
         return (
             <>
-            <Modal show={this.state.showNestedModal} onHide={() => this.nestedModal()}>
+            <Modal style={{backgroundColor:'rgba(0,0,0,0.6)'}} show={this.state.showNestedModal} onHide={() => this.nestedModal()}>
                 <Modal.Header>Heading</Modal.Header>
                 <Modal.Body>Body</Modal.Body>
                 <Modal.Footer>Footer</Modal.Footer>
