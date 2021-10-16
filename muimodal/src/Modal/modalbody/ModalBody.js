@@ -13,10 +13,11 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import MenuItem from '@material-ui/core/MenuItem'
 import { Modal } from 'react-bootstrap'
+import axios from 'axios'
 // import axios from 'axios'
 export default class MyModalBody extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             text: "text",
             // checkbox: true,
@@ -33,8 +34,9 @@ export default class MyModalBody extends React.Component {
             hsnValue: '',
             taxValue: '',
             // data : []
-            exitShow:true,
-            showNestedModal:false
+            exitShow: true,
+            showNestedModal: false,
+            responseData:[]
         }
         this.setDisable = this.setDisable.bind(this)
         this.setmaterialSelect = this.setmaterialSelect.bind(this)
@@ -50,9 +52,10 @@ export default class MyModalBody extends React.Component {
         this.settaxValue = this.settaxValue.bind(this)
         this.handleExit = this.handleExit.bind(this)
         this.nestedModal = this.nestedModal.bind(this)
+        this.submitData = this.submitData.bind(this)
     }
-    nestedModal(){
-        this.setState({showNestedModal:!this.state.showNestedModal})
+    nestedModal() {
+        this.setState({ showNestedModal: !this.state.showNestedModal })
     }
     setmaterialSelect(e) {
         this.setState({ materialSelect: e.target.value })
@@ -87,8 +90,8 @@ export default class MyModalBody extends React.Component {
     settaxValue(e) {
         this.setState({ taxValue: e.target.value })
     }
-    handleExit(e){
-        this.setState({exitShow:!this.state.exitShow})
+    handleExit(e) {
+        this.setState({ exitShow: !this.state.exitShow })
         this.props.fun(this.state.exitShow)
     }
     setDisable(e) {
@@ -105,17 +108,29 @@ export default class MyModalBody extends React.Component {
         this.setState({ hsnValue: '' })
         this.setState({ taxValue: '' })
     }
-    // componentDidMount(){
-    //     axios.get("http://localhost/db.php")
-    //     .then(response => {
-    //         this.setState({data : response.data})
-    //         console.log(this.state.data)
-    //     })
-    // }
+
+    submitData(){
+        var url = "http://localhost/DBMySQL/insert.php";
+        var Query = "SELECT * FROM test_table2";
+        var formData = new FormData();
+        formData.append("partName",this.state.partNameValue);
+        formData.append("partNo",this.state.partNumberValue);
+        formData.append("ppcName",this.state.ppcNameValue);
+        formData.append("Query",Query);
+        axios({
+            method: 'post',
+            headers: {  "Content-Type": "multipart/form-data" },
+            url: url,
+            data:formData
+        }).then(resp => console.log(resp.data))
+        .catch(err => console.error(err))
+
+        this.setState({partNameValue:"",partNumberValue:'',ppcNameValue:''})
+    }
     render() {
-        return (
-            <>
-            <Modal style={{backgroundColor:'rgba(0,0,0,0.6)'}} show={this.state.showNestedModal} onHide={() => this.nestedModal()}>
+    return (
+        <>
+            <Modal style={{ backgroundColor: 'rgba(0,0,0,0.6)' }} show={this.state.showNestedModal} onHide={() => this.nestedModal()}>
                 <Modal.Header>Heading</Modal.Header>
                 <Modal.Body>Body</Modal.Body>
                 <Modal.Footer>Footer</Modal.Footer>
@@ -130,10 +145,10 @@ export default class MyModalBody extends React.Component {
                         <div className="col-md-9">
                             <Select name="materialType" color="secondary" displayEmpty disabled={this.state.value} value={this.state.materialSelect} onChange={this.setmaterialSelect}>
                                 <MenuItem value="" disabled>Select Material Type</MenuItem>
-                                {this.props.data.map((type,index) => <MenuItem key={index} value={type.part_name}>{type.part_name}</MenuItem>)}
-                                {/* <MenuItem value={1}>Choose 1</MenuItem>
+                                {/* {this.props.data.map((type,index) => <MenuItem key={index} value={type}>{type}</MenuItem>)} */}
+                                <MenuItem value={1}>Choose 1</MenuItem>
                                 <MenuItem value={2}>Choose 2</MenuItem>
-                                <MenuItem value={3}>Choose 3</MenuItem> */}
+                                <MenuItem value={3}>Choose 3</MenuItem>
                             </Select>
                         </div>
                         <div className="col-md-1">
@@ -146,7 +161,6 @@ export default class MyModalBody extends React.Component {
                     <div className="row">
                         <div className="col-md-2">
                             <InputLabel className="InputLabel">Part Name :</InputLabel>
-
                         </div>
                         <div className="col-md-10">
                             <TextField name="partName" autoComplete="off" color="secondary" value={this.state.partNameValue} onChange={this.setpartNameValue} disabled={this.state.value} />
@@ -163,8 +177,8 @@ export default class MyModalBody extends React.Component {
                             <TextField name="partNumber" autoComplete="off" color="secondary" value={this.state.partNumberValue} disabled={this.state.value} onChange={this.setpartNumberValue} />
                         </div>
                         <div className="col-md-2">
-                            <Checkbox id="allowBom" color="secondary" disabled={this.state.value} onChange={this.setallowBomValue} checked={this.state.allowBomValue}/>
-                            <InputLabel style={{display:"inline-block"}} className="InputLabel">Allow Bom</InputLabel>
+                            <Checkbox id="allowBom" color="secondary" disabled={this.state.value} onChange={this.setallowBomValue} checked={this.state.allowBomValue} />
+                            <InputLabel style={{ display: "inline-block" }} className="InputLabel">Allow Bom</InputLabel>
                         </div>
                     </div>
                 </div>
@@ -250,7 +264,7 @@ export default class MyModalBody extends React.Component {
                             <button type="button" className="btn btn-success" style={{ width: "100%" }} onClick={() => alert("You are able to edit this")}>Edit</button>
                         </div>
                         <div className="col-sm-2">
-                            <button type="button" className="btn btn-success" disabled={this.state.value} style={{ width: "100%" }}>Save</button>
+                            <button type="button" className="btn btn-success" disabled={this.state.value} onClick={this.submitData} style={{ width: "100%" }}>Save</button>
                         </div>
                         <div className="col-sm-2">
                             <button type="button" className="btn btn-info" style={{ width: "100%" }} onClick={this.nestedModal}>Find</button>
@@ -264,7 +278,7 @@ export default class MyModalBody extends React.Component {
                     </div>
                 </div>
             </form>
-            </>
-        );
-    }
+        </>
+    );
+}
 }

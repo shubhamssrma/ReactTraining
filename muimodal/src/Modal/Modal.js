@@ -5,14 +5,15 @@ import MyModalBody from "./modalbody/ModalBody";
 import MyModalFooter from './modalfooter/ModalFooter'
 import './Modal.css'
 import MyModalHeader from "./modalheader/ModalHeader"
-import axios from "axios";
+// import axios from "axios";
 
 class Mymodal extends React.Component {
     constructor() {
         super();
         this.state = {
             show: false,
-            data: []
+            // configData: [],
+            // responseData: []
         }
         this.sendShow = this.sendShow.bind(this)
     }
@@ -23,10 +24,13 @@ class Mymodal extends React.Component {
     sendShow(e) {
         this.setState({ show: !e })
     }
-    componentDidMount(){
-        axios.get('http://localhost/Connection.php')
-        .then(response => this.setState({data:response.data}))
-    }
+    // componentDidMount() {
+    //     axios.get('http://localhost/Connection.php')
+    //         .then(response => {
+    //             this.setState({ configData: response.data })
+    //             console.log(response.data)
+    //         })
+    // }
     render() {
         return (
             <div>
@@ -36,7 +40,7 @@ class Mymodal extends React.Component {
                         <MyModalHeader />
                     </Modal.Header>
                     <Modal.Body>
-                        <MyModalBody fun={this.sendShow} data={this.state.data}/>
+                        <MyModalBody fun={this.sendShow}/>
                     </Modal.Body>
                     <Modal.Footer id="modal-footer">
                         <MyModalFooter />
