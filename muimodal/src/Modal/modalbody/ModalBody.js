@@ -110,7 +110,7 @@ export default class MyModalBody extends React.Component {
     }
 
     submitData(){
-        var url = "http://localhost/DBMySQL/insert.php";
+        var url = "http://localhost/DBMSSQL/FetchRsData.php";
         var Query = "SELECT * FROM test_table2";
         var formData = new FormData();
         formData.append("partName",this.state.partNameValue);
