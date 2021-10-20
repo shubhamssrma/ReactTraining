@@ -111,11 +111,11 @@ export default class MyModalBody extends React.Component {
 
     submitData(){
         var url = "http://localhost/DBMSSQL/FetchRsData.php";
-        var Query = "SELECT * FROM test_table2";
+        var Query = "INSERT INTO test_table2(partname,part_no,ppc_name)VALUES('"+this.state.partNameValue+"','"+this.state.partNumberValue+"','"+this.state.ppcNameValue+"')";
         var formData = new FormData();
-        formData.append("partName",this.state.partNameValue);
-        formData.append("partNo",this.state.partNumberValue);
-        formData.append("ppcName",this.state.ppcNameValue);
+        // formData.append("partName",this.state.partNameValue);
+        // formData.append("partNo",this.state.partNumberValue);
+        // formData.append("ppcName",this.state.ppcNameValue);
         formData.append("Query",Query);
         axios({
             method: 'post',
