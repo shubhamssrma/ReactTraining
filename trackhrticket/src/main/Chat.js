@@ -111,14 +111,27 @@ export class Chat extends Component {
     }
     leftSender = (e) => {
         var fd = new FormData();
-        var Query = "INSERT INTO test_table4(send_message)VALUES('" + this.state.senderMessageLeft + "')"; 
+        // var Query = "INSERT INTO test_table4(send_message)VALUES('" + this.state.senderMessageLeft + "')"; 
+        var Query = "[HRApp_Droid_Proc_Organisation_Category_GetList] '784'"; 
+        // fd.append("Query", Query);
+        // axios({
+        //     method: "POST",
+        //     headers: { "Content-Type": "multipart/form-data" },
+        //     url: 'http://localhost/DBMSSQL/FetchRsDat.php',
+        //     data: fd
+        // }).then(resp => console.log(resp));
+
         fd.append("Query", Query);
         axios({
+            mode:"CORS",
             method: "POST",
-            headers: { "Content-Type": "multipart/form-data" },
-            url: 'http://localhost/DBMSSQL/FetchRsDat.php',
+            headers: { 
+                "Content-Type": "multipart/form-data",
+                // "Access-Control-Allow-Origin": "http://trackhr.hexbis.tech"
+            },
+            url: 'http://trackhr.hexbis.tech/Sandbox/Fetchrsdata.php',
             data: fd
-        }).then(resp => console.log(resp));
+        }).then(resp => console.log('Query hitted with data : ',resp));
 
         this.setState({
             senderMessageLeft: "",
