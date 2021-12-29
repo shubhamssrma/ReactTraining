@@ -1,0 +1,41 @@
+/* Resolution Modal CSS Start */
+.InputLabel{
+    line-height: 2.5 !important;
+}
+.MuiFormControl-root{
+    display: block !important;
+}
+.MuiInputBase-root{
+    display:block !important
+}
+.MuiCheckbox-root{
+    color:#26C6DA !important;
+    padding-left: 0px !important;
+}
+.MuiInputBase-input{
+    border:none !important;
+    /* border-radius:5px; */
+}
+.MuiInput-colorSecondary.MuiInput-underline:after{
+    border-bottom-color:#26C6DA !important;
+}
+.MuiInput-underline::before{
+    border-bottom:none !important
+}
+#yesNoBtn{
+    color: #26C6DA;
+    font-weight: bold;
+    font-size: 16px;
+}
+.modal-body{
+ padding: 0 1rem !important;
+}
+.modal-footer{
+    padding: 0 1rem 1rem;
+}
+.modal-header {
+    border-bottom: none !important;
+}
+.modal-footer{
+    border-top: none !important;
+}

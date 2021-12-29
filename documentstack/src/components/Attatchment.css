@@ -1,0 +1,74 @@
+#attatchmentBox{
+    width: 200px !important;
+    padding: 5px;
+    border-radius: 10px;
+    height: auto;
+}
+#attatchmentBox:hover{
+    cursor: pointer;
+}
+#imgSend{
+    width:100%;
+    height: 150px;
+    border-radius: 5px;
+}
+#fileExt{
+    padding:10px !important;
+    color:#fff !important;
+    font-weight:800 !important;
+    background-color: #f5f5f5 !important;
+    border-top-right-radius: 5px !important;
+    border-top-left-radius: 5px !important;
+    border:1px solid #dadce0;
+}
+#fileExt h1{
+    width: 160px;
+    height: 100px;
+    padding:30px 10px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0px 0px 10px -6px #000000;
+    color:#7c7b7b;
+    margin: 0px !important;
+    text-transform: uppercase !important;
+    font-size: 22px !important;
+    text-align: center;
+    position: relative;
+    left: 5px;
+}
+#fileIcon img{
+    width: 30px;
+    height: auto;
+}
+#listbtn a{
+    font-size: 16px !important;
+    text-decoration: none !important;
+}
+#fileName{
+    padding:5px !important;
+    /* border-radius: 20px; */
+    margin-top: -15px !important;
+    color:#474747;
+    background-color: #f5f5f5;
+    font-weight:500 !important;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border:1px solid #dadce0;
+    position: relative;
+}
+#fileName p{
+    font-size: 13px !important;
+    word-wrap: break-word !important;
+    margin-bottom: 0px !important;
+    text-align: left !important;
+    display: inline-block;
+    width: 140px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    padding-left: 5px;
+}
+#downloadBtn{
+    font-size: 30px;
+    color: rgb(102, 101, 101);
+    position: absolute;
+}
